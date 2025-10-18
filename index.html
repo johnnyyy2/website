@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr. Bricks - Professional Brick Cleaning & Pointing Services</title>
+    <title>Mr. Bricks - Professional Brick Cleaning & Pointing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== CSS RESET & VARIABLES ===== */
@@ -19,37 +19,194 @@
             --secondary: #A0522D;
             --accent: #CD853F;
             --light: #F5F5F5;
-            --dark: #333333;
+            --dark: #1a1a1a;
             --text: #444444;
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         html {
             scroll-behavior: smooth;
+            height: 100%;
         }
 
         body {
-            background-color: var(--light);
+            background: var(--bg-gradient);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100%;
+            position: relative;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
+        /* ===== BACKGROUND EFFECTS ===== */
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 300px;
+            background: rgba(26, 26, 26, 0.9);
+            color: white;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .nav-links li {
+            margin-bottom: 15px;
+        }
+
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 8px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            border-bottom: 1px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        .contact-info {
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* ===== CONTENT AREA ===== */
+        .content {
+            flex: 1;
+            margin-left: 300px;
+            padding: 0;
         }
 
         .section {
-            padding: 80px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 60px;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .section:nth-child(odd) {
+            background: rgba(245, 245, 245, 0.8);
+        }
+
+        .section-content {
+            max-width: 800px;
+            width: 100%;
         }
 
         .section-title {
-            text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .section-title h2 {
@@ -64,8 +221,7 @@
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
             width: 80px;
             height: 3px;
             background-color: var(--primary);
@@ -74,8 +230,31 @@
         .section-title p {
             font-size: 1.1rem;
             max-width: 600px;
-            margin: 0 auto;
             color: var(--text);
+        }
+
+        /* ===== HERO SECTION ===== */
+        #home {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+
+        #home .section-content {
+            max-width: 900px;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #home p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
         }
 
         .btn {
@@ -98,126 +277,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* ===== HEADER & NAVIGATION ===== */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-right: 10px;
-            transition: var(--transition);
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .logo-text span {
-            color: var(--secondary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: var(--transition);
-        }
-
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 150px 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
         .btn-secondary {
             background-color: transparent;
             border: 2px solid white;
@@ -228,11 +287,14 @@
             color: var(--dark);
         }
 
-        /* ===== SERVICES SECTION ===== */
-        .services {
-            background-color: var(--light);
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
         }
 
+        /* ===== SERVICES SECTION ===== */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -257,16 +319,6 @@
             background-size: cover;
             background-position: center;
             position: relative;
-        }
-
-        .service-img::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
         }
 
         .service-content {
@@ -306,10 +358,6 @@
         }
 
         /* ===== ABOUT SECTION ===== */
-        .about {
-            background-color: white;
-        }
-
         .about-content {
             display: flex;
             align-items: center;
@@ -402,10 +450,6 @@
         }
 
         /* ===== TESTIMONIALS SECTION ===== */
-        .testimonials {
-            background-color: var(--light);
-        }
-
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -507,29 +551,6 @@
             text-align: center;
         }
 
-        .contact-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .contact-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .contact-social a:hover {
-            background-color: var(--secondary);
-            transform: translateY(-3px);
-        }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -565,98 +586,39 @@
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 60px 0 20px;
+            padding: 40px 0 20px;
+            text-align: center;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .footer-social a:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .copyright {
-            text-align: center;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             color: #aaa;
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--dark);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
         }
 
         /* ===== RESPONSIVE STYLES ===== */
@@ -669,54 +631,39 @@
                 flex-direction: column;
             }
             
-            .hero h1 {
+            #home h1 {
                 font-size: 2.8rem;
             }
         }
 
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                padding: 15px 0;
+            .sidebar {
+                width: 250px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
             
-            .logo {
-                margin-bottom: 15px;
+            .sidebar.active {
+                transform: translateX(0);
             }
             
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                margin-top: 20px;
+            .content {
+                margin-left: 0;
             }
             
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
+            .section {
+                padding: 80px 30px;
             }
             
             .mobile-menu {
-                display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
+                display: flex;
             }
             
-            .hero {
-                padding: 100px 0;
-                background-attachment: scroll;
-            }
-            
-            .hero h1 {
+            #home h1 {
                 font-size: 2.2rem;
             }
             
-            .hero p {
+            #home p {
                 font-size: 1rem;
             }
             
@@ -725,29 +672,17 @@
                 align-items: center;
             }
             
-            .section {
-                padding: 60px 0;
-            }
-            
             .section-title h2 {
                 font-size: 2rem;
-            }
-            
-            .service-img {
-                height: 180px;
             }
         }
 
         @media (max-width: 576px) {
-            .container {
-                width: 95%;
+            .section {
+                padding: 80px 20px;
             }
             
-            .hero {
-                padding: 80px 0;
-            }
-            
-            .hero h1 {
+            #home h1 {
                 font-size: 1.8rem;
             }
             
@@ -758,355 +693,293 @@
             .service-card, .feature, .testimonial {
                 margin: 0 10px;
             }
-            
-            .service-img {
-                height: 160px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .footer-column h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-
-        @media (max-width: 400px) {
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-            
-            .hero p {
-                font-size: 0.9rem;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.6rem;
-            }
-            
-            .service-img {
-                height: 140px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">
+    <div class="bg"></div>
+    
+    <div class="mobile-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
                 <i class="fas fa-bricks logo-icon"></i>
                 <div class="logo-text">Mr. <span>Bricks</span></div>
-            </a>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
+                <p class="tagline">Brick Cleaning & Pointing Specialist</p>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Professional Brick Cleaning & Pointing Services</h1>
-                <p>Restoring the beauty and integrity of your brickwork with expert care and attention to detail. Quality service from a trusted professional.</p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn">Get a Free Quote</a>
-                    <a href="#services" class="btn btn-secondary">Our Services</a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Why Choose Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> contact@mrbricks.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Serving Local Area</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="section services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Comprehensive brickwork solutions for residential and commercial properties</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');"></div>
-                    <div class="service-content">
-                        <h3>Brick Cleaning</h3>
-                        <p>Professional cleaning to remove dirt, grime, and stains from your brickwork, restoring its original appearance and protecting it from damage.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        
+        <!-- Content Area -->
+        <div class="content">
+            <!-- Home Section -->
+            <section id="home" class="section">
+                <div class="section-content">
+                    <h1>Professional Brick Cleaning & Pointing Services</h1>
+                    <p>Restoring the beauty and integrity of your brickwork with expert care and attention to detail. Quality service from a trusted professional.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn">Get a Free Quote</a>
+                        <a href="#services" class="btn btn-secondary">Our Services</a>
                     </div>
                 </div>
-                <div class="service-card fade-in">
-                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794358-b7f4b27b6b8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');"></div>
-                    <div class="service-content">
-                        <h3>Repointing</h3>
-                        <p>Expert repointing services to replace deteriorated mortar, improving structural integrity and preventing moisture penetration.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </section>
+            
+            <!-- Services Section -->
+            <section id="services" class="section">
+                <div class="section-content">
+                    <div class="section-title">
+                        <h2>Our Services</h2>
+                        <p>Comprehensive brickwork solutions for residential and commercial properties</p>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');"></div>
+                            <div class="service-content">
+                                <h3>Brick Cleaning</h3>
+                                <p>Professional cleaning to remove dirt, grime, and stains from your brickwork, restoring its original appearance and protecting it from damage.</p>
+                                <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794358-b7f4b27b6b8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');"></div>
+                            <div class="service-content">
+                                <h3>Repointing</h3>
+                                <p>Expert repointing services to replace deteriorated mortar, improving structural integrity and preventing moisture penetration.</p>
+                                <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794237-6421d06a0ecc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');"></div>
+                            <div class="service-content">
+                                <h3>Brick Restoration</h3>
+                                <p>Comprehensive restoration services to repair damaged bricks and bring old brickwork back to its former glory.</p>
+                                <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="service-card fade-in">
-                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794237-6421d06a0ecc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');"></div>
-                    <div class="service-content">
-                        <h3>Brick Restoration</h3>
-                        <p>Comprehensive restoration services to repair damaged bricks and bring old brickwork back to its former glory.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </section>
+            
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="section-content">
+                    <div class="section-title">
+                        <h2>About Mr. Bricks</h2>
+                        <p>Quality craftsmanship from a dedicated professional</p>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>Expert Brickwork Services You Can Trust</h2>
+                            <p>Mr. Bricks is a one-man operation dedicated to providing exceptional brick cleaning and pointing services. With years of experience and a passion for quality craftsmanship, I take pride in every project I undertake.</p>
+                            <p>As a solo business owner, I personally handle every aspect of your project, ensuring attention to detail and consistent quality throughout. My commitment to excellence means you receive personalized service and results that exceed expectations.</p>
+                            
+                            <div class="about-features">
+                                <div class="about-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Over 10 years of experience in brickwork</span>
+                                </div>
+                                <div class="about-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Fully insured and certified</span>
+                                </div>
+                                <div class="about-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Attention to detail in every project</span>
+                                </div>
+                                <div class="about-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Competitive pricing with no hidden costs</span>
+                                </div>
+                            </div>
+                            
+                            <a href="#contact" class="btn">Contact Me Today</a>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Mr. Bricks at work">
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+            
+            <!-- Features Section -->
+            <section id="features" class="section">
+                <div class="section-content">
+                    <div class="section-title">
+                        <h2>Why Choose Mr. Bricks</h2>
+                        <p>What sets my services apart from the competition</p>
+                    </div>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-user-check"></i>
+                            <h3>Personalized Service</h3>
+                            <p>As a one-man business, you work directly with me throughout your project, ensuring consistent quality and attention to detail.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-award"></i>
+                            <h3>Quality Craftsmanship</h3>
+                            <p>Years of experience and dedication to my craft mean you receive exceptional results that stand the test of time.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Honest & Reliable</h3>
+                            <p>Transparent pricing and clear communication ensure you know exactly what to expect with no surprises.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-thumbs-up"></i>
+                            <h3>Satisfaction Guaranteed</h3>
+                            <p>Your complete satisfaction is my top priority. I stand behind my work and ensure you're happy with the results.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="section">
+                <div class="section-content">
+                    <div class="section-title">
+                        <h2>Client Testimonials</h2>
+                        <p>What my clients say about my work</p>
+                    </div>
+                    <div class="testimonial-grid">
+                        <div class="testimonial">
+                            <p>"Mr. Bricks did an amazing job repointing our century-old home. His attention to detail was impressive, and he took the time to match the mortar perfectly. Highly recommended!"</p>
+                            <div class="client">
+                                <div class="client-avatar">SJ</div>
+                                <div class="client-info">
+                                    <h4>Sarah Johnson</h4>
+                                    <p>Homeowner</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p>"I hired Mr. Bricks to clean the brickwork on my commercial building. The transformation was incredible! Professional, punctual, and reasonably priced."</p>
+                            <div class="client">
+                                <div class="client-avatar">MT</div>
+                                <div class="client-info">
+                                    <h4>Michael Thompson</h4>
+                                    <p>Business Owner</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p>"Working with a solo professional made all the difference. The communication was excellent, and the quality of work exceeded my expectations. Will definitely hire again."</p>
+                            <div class="client">
+                                <div class="client-avatar">DW</div>
+                                <div class="client-info">
+                                    <h4>David Wilson</h4>
+                                    <p>Property Manager</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <div class="section-content">
+                    <div class="section-title">
+                        <h2>Contact Me</h2>
+                        <p>Get in touch for a free consultation and quote</p>
+                    </div>
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <h3>Get In Touch</h3>
+                            <p>Ready to restore your brickwork? Contact me today to discuss your project and receive a free, no-obligation quote.</p>
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <p>(555) 123-4567</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <p>contact@mrbricks.com</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Serving the local area and surrounding regions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="service">Service Needed</label>
+                                    <select id="service" class="form-control">
+                                        <option value="">Select a service</option>
+                                        <option value="cleaning">Brick Cleaning</option>
+                                        <option value="pointing">Repointing</option>
+                                        <option value="restoration">Brick Restoration</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Project Details</label>
+                                    <textarea id="message" class="form-control" required></textarea>
+                                </div>
+                                <button type="submit" class="btn">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer>
+                <div class="footer-content">
+                    <p>&copy; 2023 Mr. Bricks. All rights reserved.</p>
+                    <div class="copyright">
+                        <p>Professional Brick Cleaning & Pointing Services</p>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Mr. Bricks</h2>
-                <p>Quality craftsmanship from a dedicated professional</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <h2>Expert Brickwork Services You Can Trust</h2>
-                    <p>Mr. Bricks is a one-man operation dedicated to providing exceptional brick cleaning and pointing services. With years of experience and a passion for quality craftsmanship, I take pride in every project I undertake.</p>
-                    <p>As a solo business owner, I personally handle every aspect of your project, ensuring attention to detail and consistent quality throughout. My commitment to excellence means you receive personalized service and results that exceed expectations.</p>
-                    
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Over 10 years of experience in brickwork</span>
-                        </div>
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Fully insured and certified</span>
-                        </div>
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Attention to detail in every project</span>
-                        </div>
-                        <div class="about-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Competitive pricing with no hidden costs</span>
-                        </div>
-                    </div>
-                    
-                    <a href="#contact" class="btn">Contact Me Today</a>
-                </div>
-                <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Mr. Bricks at work">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us -->
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Mr. Bricks</h2>
-                <p>What sets my services apart from the competition</p>
-            </div>
-            <div class="features">
-                <div class="feature fade-in">
-                    <i class="fas fa-user-check"></i>
-                    <h3>Personalized Service</h3>
-                    <p>As a one-man business, you work directly with me throughout your project, ensuring consistent quality and attention to detail.</p>
-                </div>
-                <div class="feature fade-in">
-                    <i class="fas fa-award"></i>
-                    <h3>Quality Craftsmanship</h3>
-                    <p>Years of experience and dedication to my craft mean you receive exceptional results that stand the test of time.</p>
-                </div>
-                <div class="feature fade-in">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Honest & Reliable</h3>
-                    <p>Transparent pricing and clear communication ensure you know exactly what to expect with no surprises.</p>
-                </div>
-                <div class="feature fade-in">
-                    <i class="fas fa-thumbs-up"></i>
-                    <h3>Satisfaction Guaranteed</h3>
-                    <p>Your complete satisfaction is my top priority. I stand behind my work and ensure you're happy with the results.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Client Testimonials</h2>
-                <p>What my clients say about my work</p>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial fade-in">
-                    <p>"Mr. Bricks did an amazing job repointing our century-old home. His attention to detail was impressive, and he took the time to match the mortar perfectly. Highly recommended!"</p>
-                    <div class="client">
-                        <div class="client-avatar">SJ</div>
-                        <div class="client-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>Homeowner</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial fade-in">
-                    <p>"I hired Mr. Bricks to clean the brickwork on my commercial building. The transformation was incredible! Professional, punctual, and reasonably priced."</p>
-                    <div class="client">
-                        <div class="client-avatar">MT</div>
-                        <div class="client-info">
-                            <h4>Michael Thompson</h4>
-                            <p>Business Owner</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial fade-in">
-                    <p>"Working with a solo professional made all the difference. The communication was excellent, and the quality of work exceeded my expectations. Will definitely hire again."</p>
-                    <div class="client">
-                        <div class="client-avatar">DW</div>
-                        <div class="client-info">
-                            <h4>David Wilson</h4>
-                            <p>Property Manager</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Me</h2>
-                <p>Get in touch for a free consultation and quote</p>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info fade-in">
-                    <h3>Get In Touch</h3>
-                    <p>Ready to restore your brickwork? Contact me today to discuss your project and receive a free, no-obligation quote.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <p>(555) 123-4567</p>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <p>contact@mrbricks.com</p>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Serving the local area and surrounding regions</p>
-                        </div>
-                    </div>
-                    <div class="contact-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form fade-in">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Needed</label>
-                            <select id="service" class="form-control">
-                                <option value="">Select a service</option>
-                                <option value="cleaning">Brick Cleaning</option>
-                                <option value="pointing">Repointing</option>
-                                <option value="restoration">Brick Restoration</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Project Details</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Mr. Bricks</h3>
-                    <p>Professional brick cleaning and pointing services with a commitment to quality craftsmanship and customer satisfaction.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Brick Cleaning</a></li>
-                        <li><a href="#">Repointing</a></li>
-                        <li><a href="#">Brick Restoration</a></li>
-                        <li><a href="#">Consultation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> contact@mrbricks.com</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Serving Local Area</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Mr. Bricks. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <script>
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('show');
+            document.querySelector('.sidebar').classList.toggle('active');
         });
 
         // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a, .hero-btns a').forEach(anchor => {
+        document.querySelectorAll('.nav-links a, .hero-btns a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
@@ -1114,12 +987,12 @@
                 const targetElement = document.querySelector(targetId);
                 
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80,
+                    top: targetElement.offsetTop,
                     behavior: 'smooth'
                 });
                 
                 // Close mobile menu if open
-                document.querySelector('nav ul').classList.remove('show');
+                document.querySelector('.sidebar').classList.remove('active');
             });
         });
 
@@ -1130,30 +1003,13 @@
             this.reset();
         });
 
-        // Scroll animations
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(element => {
-            observer.observe(element);
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.padding = '10px 0';
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.padding = '20px 0';
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.sidebar');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (!sidebar.contains(e.target) && !mobileMenu.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
             }
         });
     </script>
